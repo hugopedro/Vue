@@ -1,0 +1,28 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+<div id="app"> <!--NAO É CASE-SENSITIVE-->
+    <contador></contador>
+    <CONTADOR></contador>
+    <contadoR></contadoR>
+</div>
+<script> //Vue.component registra de forma global
+    Vue.component('contador', { // o template poe as coisas html dentro dele, e tem que por dentro de div se nao nao vai ir!!
+        template: `
+            <div>
+                <span>{{ contador }}</span>
+                <button @click="contador++">+</button>
+                <button @click="contador--">-</button>
+            </div>
+    `,
+    data() { // a data tem q virar função e retornar
+        return {
+            contador: 0 
+        }
+      }
+    })
+    new Vue({
+        el: '#app',
+    })
+</script>
+
+<!--Desta forma é possível fazer uma re-utilização das coisas!! (linha 5 e 6)-->
