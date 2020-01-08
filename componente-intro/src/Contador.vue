@@ -1,3 +1,22 @@
+<!-- 
+1) Cria-se um componente que é a parte do HTML (linha 5 a 11)
+2) Faz a parte do javascript <script>
+3) Registra o componente globalmente apartir de main usando import e chamando vue.component passando os valores.<template>
+4) Entra-se no app.vue e usamos o componente criado, no caso     <app-contadores /> , ele tambem carrega qualquer coisa que ele referencie
+-->
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style>
+
+</style>
+-->
+
 <template>
   <div class="contador">
     <span>{{ contador }}</span>
