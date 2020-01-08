@@ -4,8 +4,6 @@
 3) Registra o componente globalmente apartir de main usando import e chamando vue.component passando os valores.<template>
 4) Entra-se no app.vue e usamos o componente criado, no caso     <app-contadores /> , ele tambem carrega qualquer coisa que ele referencie
 -->
-</template>
-
 <script>
 export default {
 
@@ -15,7 +13,6 @@ export default {
 <style>
 
 </style>
--->
 
 <template>
   <div class="contador">
@@ -43,14 +40,14 @@ export default {
 }
 </script>
 
-<style>
-    .contador span {
+<style scoped>
+    span {
         border-bottom: 1px solid #CCC;
         height: 30px;
         padding: 5px 25px;
     }
 
-    .contador button {
+    button[data-v-6cbbf471] {
         height: 30px;
         width: 30px;
         border-radius: 15px;

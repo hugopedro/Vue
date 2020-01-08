@@ -2,6 +2,7 @@
   <div id="app"> <!-- ja que mais de um elemento precisa de div --->
     <h1>Contadores</h1>
     <app-contadores />  
+    <button>?</button>
   </div>
 </template>
 <!--103. Criar projeto usando Vue CLI -->

@@ -2,7 +2,8 @@
 
 <template>
   <div class="contadores">
-      <app-contador />
+      <h1>Contadores</h1>
+      <app-contador v-for="c in 5" :key="c" />
   </div>
 </template>
 
