@@ -5,7 +5,8 @@
         <button @click="alterarNome">Alterar Nome</button>
         <hr>
         <div class="componentes"> <!--binda o valor definido como nome -->
-            <app-usuario-info :nome="nome"/>
+        <!--o nome tem que ser do tipo definido, se for mudar de tipo vai dar erro -->
+            <app-usuario-info />
             <app-usuario-editar />
         </div>
     </div>
