@@ -10,6 +10,7 @@
             <app-usuario-info 
                 :nome = "nome"
                 @nomeMudou = "nome = $event.novo"
+                :reiniciarFn="reiniciarNome" 
             /> <!--ele pode ler objetos, nesse caso é o obj novo lá da linha 34 do usuarioinfo -->
             <app-usuario-editar />
         </div>
@@ -24,12 +25,15 @@ export default {
     components: { AppUsuarioInfo, AppUsuarioEditar },
     data() {
         return {
-            nome: 'Pedro Silva'
+            nome: 'Pedro'
         }
     },
     methods: {
         alterarNome() {
             this.nome = 'Ana'
+        },
+        reiniciarNome() {
+            this.nome = 'Pedro'
         }
     }
 }

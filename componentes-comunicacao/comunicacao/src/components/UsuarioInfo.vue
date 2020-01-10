@@ -4,6 +4,7 @@
         <p>Vários detalhes...</p>
         <p>Nome do Usuario: <strong> {{ inverterNome() }}</strong></p>
         <button @click="reiniciarNome">Reiniciar Nome</button>
+        <button @click="reiniciarFn()">Reiniciar Nome (Callback)</button>
     </div>
 </template>
 
@@ -22,6 +23,8 @@ export default {
         }
         // ao definir o tipo garante que a mensagem de erro fale que um tipo errado foi passado por parametro
         // Exemplo: (Usuario.vue linha 9)
+        , //cria um novo dado do tipo function
+        reiniciarFn: Function
     },
     methods: {
         inverterNome() {
