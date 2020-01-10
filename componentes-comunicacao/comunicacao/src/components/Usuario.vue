@@ -2,11 +2,15 @@
     <div class="container">
         <h1>Componente Usuário</h1>
         <p>Esse é um componente muito legal!</p>
+        <p>nome é <strong>{{nome}}</strong></p>
         <button @click="alterarNome">Alterar Nome</button>
         <hr>
         <div class="componentes"> <!--binda o valor definido como nome -->
         <!--o nome tem que ser do tipo definido, se for mudar de tipo vai dar erro -->
-            <app-usuario-info />
+            <app-usuario-info 
+                :nome = "nome"
+                @nomeMudou = "nome = $event.novo"
+            /> <!--ele pode ler objetos, nesse caso é o obj novo lá da linha 34 do usuarioinfo -->
             <app-usuario-editar />
         </div>
     </div>

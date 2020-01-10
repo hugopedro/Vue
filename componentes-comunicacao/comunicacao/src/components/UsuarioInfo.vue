@@ -3,6 +3,7 @@
         <h2>As Informações de Usuário</h2>
         <p>Vários detalhes...</p>
         <p>Nome do Usuario: <strong> {{ inverterNome() }}</strong></p>
+        <button @click="reiniciarNome">Reiniciar Nome</button>
     </div>
 </template>
 
@@ -25,6 +26,16 @@ export default {
     methods: {
         inverterNome() {
             return this.nome.split('').reverse().join('')
+        },
+        reiniciarNome() {
+            const antigo = this.nome
+            this.nome = 'Pedro'
+            //Fazer com que o componente filho "conheça" o pai, disparando um evento
+            this.$emit('nomeMudou', { // tambem pode passar um objeto!, lá no usuario.vue lê pelo $event
+                novo: this.nome,
+                antigo
+            })
+            //se o componente-pai estiver interessado em ouvir esse evento, deve-se por @NomedoEvento = "" (ver no usuario.vue)
         }
     }
 }
