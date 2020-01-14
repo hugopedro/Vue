@@ -8,12 +8,13 @@
 </template>
 
 <script>
+import barramento from '@/barramento'
 export default {
     props: ['idade'],
     methods: {
         alterarIdade() {
-            // this.idade = 33
-            this.$emit('idadeMudou', 33) //se ficar colocando com letra maiuscula, IdadeMudou vai quebrar tudo!!!!!
+            this.idade = 33
+            barramento.$emit('idadeMudou', this.idade) //se ficar colocando com letra maiuscula, IdadeMudou vai quebrar tudo!!!!!
         }
     }
 }

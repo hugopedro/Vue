@@ -6,7 +6,6 @@
 
 <script>
 import AppUsuario from "./components/Usuario.vue";
-
 export default {
 	name: "app",
 	components: { AppUsuario }

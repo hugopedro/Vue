@@ -16,7 +16,6 @@
             /> <!--ele pode ler objetos, nesse caso é o obj novo lá da linha 34 do usuarioinfo -->
             <app-usuario-editar 
             :idade="idade" 
-            @idadeMudou="idade = $event + 1"
             />
         </div>
     </div>
@@ -25,7 +24,7 @@
 <script>
 import AppUsuarioInfo from './UsuarioInfo'
 import AppUsuarioEditar from './UsuarioEditar'
-
+import barramento from '@/barramento'
 export default {
     components: { AppUsuarioInfo, AppUsuarioEditar },
     data() {

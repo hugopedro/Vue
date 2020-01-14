@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import barramento from '@/barramento' //Sem os imports os componentes irmaos nao irão se comunicar
 export default {
    /* Define a propiedade associada ao componente!
     * Diz ao UsuarioInfo.vue que aceita receber uma propiedade nome
@@ -42,7 +43,14 @@ export default {
             })
             //se o componente-pai estiver interessado em ouvir esse evento, deve-se por @NomedoEvento = "" (ver no usuario.vue)
         }
-    }
+    },
+    created() {
+        //escutar o evento do tipo idadeMudou, quando quero escutar o evento deve-se por um callback no parametro
+        // idade nao vai ter parenteses pois  é só um parâmetro na arrow function
+        barramento.$on('idadeMudou', idade => {
+            this.idade = idade;
+        }) // A COMUNICAÇÃO ESTÁ ACONTECENDO PELO EVENTO BUS BARRAMENTO SEM PASSAR PELO COMPONENTE PAI!
+    } 
 }
 </script>
 
