@@ -13,8 +13,10 @@ export default {
     props: ['idade'],
     methods: {
         alterarIdade() {
-            this.idade = 33
-            barramento.$emit('idadeMudou', this.idade) //se ficar colocando com letra maiuscula, IdadeMudou vai quebrar tudo!!!!!
+            this.idade += 1
+            barramento.alterarIdade(this.idade) //se ficar colocando com letra maiuscula, IdadeMudou vai quebrar tudo!!!!!
+            //agora nao precia mais passar o nome do evento, só a idade
+            //cuidado pra nao por $ sem querer em objetos como alterarIdade
         }
     }
 }

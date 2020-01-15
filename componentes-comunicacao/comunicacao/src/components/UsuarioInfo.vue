@@ -47,7 +47,8 @@ export default {
     created() {
         //escutar o evento do tipo idadeMudou, quando quero escutar o evento deve-se por um callback no parametro
         // idade nao vai ter parenteses pois  é só um parâmetro na arrow function
-        barramento.$on('idadeMudou', idade => {
+        // nao é mais necessário aquele primeiro parametro
+        barramento.quandoIdadeMudar(idade => {
             this.idade = idade;
         }) // A COMUNICAÇÃO ESTÁ ACONTECENDO PELO EVENTO BUS BARRAMENTO SEM PASSAR PELO COMPONENTE PAI!
     } 
