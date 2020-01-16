@@ -5,7 +5,7 @@
             <button @click="numero++">&gt;</button>
         </span>
         <Citacao>
-            <p>{{ citacoes[indice].autor }}</p>
+            <h1><p>{{ citacoes[indice].autor }}</p></h1>
             <p>{{ citacoes[indice].texto }}</p>
             <p>{{ citacoes[indice].fonte }}</p>
         </Citacao>
@@ -50,4 +50,11 @@ export default {
         flex-direction: column;
         align-items: center;
     }
+
+        h1 {
+        color: green!important;
+    }
 </style>
+
+<!-- Então nota-se que é possível aplicar estilos tanto no componente quanto no arquivo que tem o <slot>
+<!-- e é preciso ter atenção porque pode haver conflito se for definido nos 2
