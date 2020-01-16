@@ -1,6 +1,6 @@
 <template>
     <div class="citacao">
-        {{ texto }}
+        <slot></slot> <!--slot faz com que possa exibir aquilo que foi passado dentro do corpo do componente -->
     </div>
 </template>
 
