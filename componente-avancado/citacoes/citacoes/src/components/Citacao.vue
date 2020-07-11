@@ -1,6 +1,8 @@
 <template>
     <div class="citacao">
-        <slot></slot> <!--slot faz com que possa exibir aquilo que foi passado dentro do corpo do componente -->
+        <slot name="fonte"></slot> <!--slot faz com que possa exibir aquilo que foi passado dentro do corpo do componente -->
+        <slot name="texto"></slot> 
+        <slot name="autor"></slot> 
     </div>
 </template>
 
