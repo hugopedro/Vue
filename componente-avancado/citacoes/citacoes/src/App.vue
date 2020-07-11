@@ -4,7 +4,11 @@
 			<button @click="componente = 'Citacoes'">Citações</button>
 			<button @click="componente = 'Sobre'">Sobre</button>
 		</span>
-		<component :is="componente" />
+		<keep-alive>
+			<component :is="componente" />
+		</keep-alive>
+		<!-- keep-alive serve para por exemplo, selecionei uma frase e mudei de tela/componente, quando eu voltar pra tela original
+		vai estar a mesma frase ,e nao vai voltar pra frase inicial! -->
 	</div>
 </template>
 
