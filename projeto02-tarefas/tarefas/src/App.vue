@@ -1,22 +1,37 @@
 <template>
 	<div id="app">
 		<h1>Tarefas</h1>
+		<NewTask @taskAdded="addTask" />
 		<TaskGrid :tasks="tasks"/>
 	</div>
 </template>
 
 <script>
+import NewTask from './components/NewTask.vue'
 import TaskGrid from './components/TaskGrid.vue'
 
 
 export default {
-	components: { TaskGrid },
+	components: { NewTask, TaskGrid },
 	data() {
 		return {
 			tasks: [
 				{ name: 'Lavar a louça', pending: false},
 				{ name: 'Comprar blusa', pending: true}
 			]
+		}
+	},
+	methods: {
+		addTask(task) {
+			const sameName = t => t.name === task.name
+			const reallyNew = this.tasks.filter(sameName).length == 0 //verifica se nenhum elemento tem o mesmo nome
+			// ^filtre todas as tasks que tem o mesmo nome, se o array final for vazio quer dizer que nao tem task igual
+			if (reallyNew) {
+				this.tasks.push({
+					name: task.name,
+					pending: task.pending ||  true
+				})
+			}
 		}
 	}
 }
