@@ -29,7 +29,7 @@ export default {
 			if (reallyNew) {
 				this.tasks.push({
 					name: task.name,
-					pending: task.pending ||  true
+					pending: task.pending ||  true // se nao tiver task.pending por padrao a task estará pendente (true) ou é o valor default
 				})
 			}
 		}
