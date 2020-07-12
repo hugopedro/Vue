@@ -2,7 +2,7 @@
   <div class="task-grid">
       <template v-if="tasks.length">
           <!--nao pode aceitar duas tarefas com o mesmo nome entao vou por nome como chave -->
-          <Task v-for="task in tasks" :key="task.name" :task="task"></Task>
+          <Task v-for="(task, i) in tasks" :key="task.name" @taskDeleted="$emit('taskDeleted', i)" :task="task"></Task>
           <!--gera as divs -->
       </template>
       <p v-else class="no-task">Sua vida está em dia :)</p>

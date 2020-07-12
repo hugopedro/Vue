@@ -2,7 +2,7 @@
 	<div id="app">
 		<h1>Tarefas</h1>
 		<NewTask @taskAdded="addTask" />
-		<TaskGrid :tasks="tasks"/>
+		<TaskGrid @taskDeleted="deleteTask" :tasks="tasks"/> <!-- atencao com o case sensitive -->
 	</div>
 </template>
 
@@ -15,10 +15,8 @@ export default {
 	components: { NewTask, TaskGrid },
 	data() {
 		return {
-			tasks: [
-				{ name: 'Lavar a louça', pending: false},
-				{ name: 'Comprar blusa', pending: true}
-			]
+			tasks: []
+			//agora já é possivel criar task dinamicamente
 		}
 	},
 	methods: {
@@ -32,6 +30,9 @@ export default {
 					pending: task.pending ||  true // se nao tiver task.pending por padrao a task estará pendente (true) ou é o valor default
 				})
 			}
+		},
+		deleteTask(i) {
+			this.tasks.splice( i , 1 )
 		}
 	}
 }
