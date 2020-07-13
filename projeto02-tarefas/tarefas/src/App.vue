@@ -1,8 +1,11 @@
 <template>
 	<div id="app">
 		<h1>Tarefas</h1>
+		<!-- atencao com o case sensitive, a linha 6 ta passando como propiedade a lista de tasks-->
 		<NewTask @taskAdded="addTask" />
-		<TaskGrid @taskDeleted="deleteTask" :tasks="tasks"/> <!-- atencao com o case sensitive -->
+		<TaskGrid :tasks="tasks"
+		@taskDeleted="deleteTask" 
+		@taskStateChanged="toggleTaskState" /> <!-- muita atenção no case sensitive, se colocasse taskstateChanged ia ser dificil de detectar o erro! -->
 	</div>
 </template>
 
@@ -33,6 +36,9 @@ export default {
 		},
 		deleteTask(i) {
 			this.tasks.splice( i , 1 )
+		},
+		toggleTaskState(i) { //se tiver pendente ele coloca falso se nao verdadeiro
+			this.tasks[i].pending = !this.tasks[i].pending
 		}
 	}
 }

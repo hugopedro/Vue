@@ -1,6 +1,8 @@
 <template>
-  <div class="task" :class="stateClass">
-    <span @click="$emit('taskDeleted', task)" class="close">x</span>
+  <div 
+      @click="$emit('taskStateChanged', task)"
+      class="task" :class="stateClass">
+      <span @click.stop="$emit('taskDeleted', task)" class="close">x</span> <!--.stop pra nao misturar as chamadas, que tão no mesmo 'balaio' , ia dar conflito com o outro emit da linha acima-->
       <p>{{ task.name }}</p>
   </div>
 </template>
