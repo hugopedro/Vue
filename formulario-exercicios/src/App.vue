@@ -5,7 +5,7 @@
 			<form class="painel">
 				<div class="cabecalho">Formulário</div>
 				<Rotulo nome="E-mail">
-					<input type="text" v-model,lazy.trim="usuario.email"> <!-- Linka o email da instancia Vue -->
+					<input type="text" v-model.lazy.trim="usuario.email"> <!-- Linka o email da instancia Vue -->
 				</Rotulo> <!--lazy eh pra atualizar qd ele des-selecionar o campo e trim pra cortar espaços nas pontas -->
 				<Rotulo nome="Senha">
 					<input type="password" v-model="usuario.senha">
@@ -17,8 +17,10 @@
 					<textarea name="" cols="30" rows="5" v-model="mensagem"></textarea>
 				</Rotulo>
 				<Rotulo nome="Características do Problema">
-					<span class="mr-4"><input type="checkbox" value="reproduzivel"> Reproduzível</span>
-					<span><input type="checkbox" value="intermitente"> Intermitente</span>
+					<span class="mr-4"><input type="checkbox" v-model="caracteristicas"
+					value="reproduzivel"> Reproduzível</span>
+					<span><input type="checkbox" v-model="caracteristicas" 
+					value="intermitente"> Intermitente</span>
 				</Rotulo>
 				<Rotulo nome="Qual produto?">
 					<span class="mr-4"><input type="radio"> Web</span>
@@ -49,6 +51,13 @@
 				</Rotulo>
 				<Rotulo nome="Mensagem"> <!--essa white-space pre preserva os espaços em brancos ao dar enter -->
 					<span style="white-space: pre;">{{ mensagem }}</span>
+				</Rotulo>
+				<Rotulo nome="Caracteristicas do problema">
+					<span>
+						<ul>
+							<li v-for="c in caracteristicas" :key="c"> {{ c }} </li>
+						</ul>
+					</span>
 				</Rotulo>
 				<Rotulo nome="Marque as Opções">
 					<span>???</span>
@@ -82,6 +91,7 @@ export default {
 	data() {
 		return {
 			mensagem : '',
+			caracteristicas: [],
 			usuario: { // é bom por os dados aqui pra ficar claro, mas se nao por ainda funciona
 				email: '',
 				senha: '',
