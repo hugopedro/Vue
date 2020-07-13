@@ -37,7 +37,7 @@
 					</select> <!-- :selected="prioridade.codigo === 1"> é só pra deixar por padrao selecionado-->
 				</Rotulo>
 				<Rotulo nome="Primeira Reclamação?">
-					<Escolha />
+					<Escolha v-model="escolha"/>
 				</Rotulo>
 				<hr>
 				<button>Enviar</button>
@@ -73,7 +73,7 @@
 					<span>{{ prioridade }} {{ tipoPrioridade }}</span>
 				</Rotulo>
 				<Rotulo nome="Primeira Reclamação?">
-					<span>???</span>
+					<span>{{ escolha }}</span>
 				</Rotulo>
 			</div>
 		</div>
@@ -111,7 +111,8 @@ export default {
 				email: '',
 				senha: '',
 				idade: 22
-			}
+			},
+			escolha: 'true'
 		}
 	}
 }
