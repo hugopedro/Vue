@@ -32,6 +32,15 @@ export default {
 				return Math.round(done / total * 100) || 0
 			}
 	},
+	watch: {
+		tasks: {
+			deep: true, //monitora os elementos pra qd sair da pagina continuarem lá
+			handler() {
+				localStorage.setItem('tasks', JSON.stringify(this.tasks))
+			//está pegando a lista de tasks que é this.tasks e convertendo pra uma string e setando no localStorage apartir da chave tasks
+			}
+		}
+	},
 	methods: {
 		addTask(task) {
 			const sameName = t => t.name === task.name
@@ -50,6 +59,11 @@ export default {
 		toggleTaskState(i) { //se tiver pendente ele coloca falso se nao verdadeiro
 			this.tasks[i].pending = !this.tasks[i].pending
 		}
+	},
+	created() { //funcao de ciclo de vida para as tasks sobreviverem ao sair da pagina
+		const json = localStorage.getItem('tasks')
+		this.tasks = JSON.parse(json) || []
+		this.tasks = Array.isArray(array) ? array : []
 	}
 }
 </script>
