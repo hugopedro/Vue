@@ -22,10 +22,10 @@
 					<span><input type="checkbox" v-model="caracteristicas" 
 					value="intermitente"> Intermitente</span>
 				</Rotulo>
-				<Rotulo nome="Qual produto?">
-					<span class="mr-4"><input type="radio"> Web</span>
-					<span class="mr-4"><input type="radio"> Mobile</span>
-					<span><input type="radio"> Outro</span>
+				<Rotulo nome="Qual produto?"> <!--o v-model="produto" faz com que o vue entenda que desses 3 elementos radio só pode selecionar um" -->
+					<span class="mr-4"><input type="radio" value="web" v-model="produto"> Web</span>
+					<span class="mr-4"><input type="radio" value="mobile" v-model="produto"> Mobile</span>
+					<span><input type="radio" value="outro" v-model="produto"> Outro</span>
 				</Rotulo>
 				<Rotulo nome="Prioridade">
 					<select name="" id="">
@@ -63,7 +63,7 @@
 					<span>???</span>
 				</Rotulo>
 				<Rotulo nome="Qual produto?">
-					<span>???</span>
+					<span>{{ produto }}</span>
 				</Rotulo>
 				<Rotulo nome="Prioridade">
 					<span>???</span>
@@ -92,6 +92,7 @@ export default {
 		return {
 			mensagem : '',
 			caracteristicas: [],
+			produto: 'web', 
 			usuario: { // é bom por os dados aqui pra ficar claro, mas se nao por ainda funciona
 				email: '',
 				senha: '',
