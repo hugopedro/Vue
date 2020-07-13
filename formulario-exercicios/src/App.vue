@@ -5,13 +5,13 @@
 			<form class="painel">
 				<div class="cabecalho">Formulário</div>
 				<Rotulo nome="E-mail">
-					<input type="text" v-model="usuario.email"> <!-- Linka o email da instancia Vue -->
-				</Rotulo>
+					<input type="text" v-model,lazy.trim="usuario.email"> <!-- Linka o email da instancia Vue -->
+				</Rotulo> <!--lazy eh pra atualizar qd ele des-selecionar o campo e trim pra cortar espaços nas pontas -->
 				<Rotulo nome="Senha">
 					<input type="password" v-model="usuario.senha">
 				</Rotulo>
 				<Rotulo nome="Idade">
-					<input type="number" v-model="usuario.idade">
+					<input type="number" v-model.number="usuario.idade"> <!-- converte o valor para numérico sem passar por string -->
 				</Rotulo>
 				<Rotulo nome="Mensagem">
 					<textarea name="" cols="30" rows="5"></textarea>
@@ -45,7 +45,7 @@
 					<span>{{ usuario.senha }}</span>
 				</Rotulo>
 				<Rotulo nome="Idade">
-					<span>{{ usuario.idade }}</span>
+					<span>{{ usuario.idade }} {{ tipoIdade }}</span>
 				</Rotulo>
 				<Rotulo nome="Mensagem">
 					<span>???</span>
@@ -74,6 +74,11 @@ import Escolha from './components/Escolha.vue'
 export default {
 	name: 'app',
 	components: { Rotulo, Escolha },
+	computed: {
+		tipoIdade() { // converte o valor para numérico sem passar por string
+			return typeof this.usuario.idade
+		}
+	},
 	data() {
 		return {
 			usuario: { // é bom por os dados aqui pra ficar claro, mas se nao por ainda funciona
