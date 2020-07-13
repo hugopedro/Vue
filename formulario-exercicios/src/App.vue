@@ -28,9 +28,13 @@
 					<span><input type="radio" value="outro" v-model="produto"> Outro</span>
 				</Rotulo>
 				<Rotulo nome="Prioridade">
-					<select name="" id="">
-						<option></option>
-					</select>
+					<select v-model="prioridade">
+						<option v-for="prioridade in prioridades"
+						:value="prioridade.codigo"
+						:key="prioridade.codigo"
+						:selected="prioridade.codigo === 1">
+						{{ prioridade.codigo }} - {{ prioridade.nome }}</option>
+					</select> <!-- :selected="prioridade.codigo === 1"> é só pra deixar por padrao selecionado-->
 				</Rotulo>
 				<Rotulo nome="Primeira Reclamação?">
 					<Escolha />
@@ -66,7 +70,7 @@
 					<span>{{ produto }}</span>
 				</Rotulo>
 				<Rotulo nome="Prioridade">
-					<span>???</span>
+					<span>{{ prioridade }} {{ tipoPrioridade }}</span>
 				</Rotulo>
 				<Rotulo nome="Primeira Reclamação?">
 					<span>???</span>
@@ -86,13 +90,23 @@ export default {
 	computed: {
 		tipoIdade() { // converte o valor para numérico sem passar por string
 			return typeof this.usuario.idade
-		}
+		},
+		tipoPrioridade() { // converte o valor para numérico sem passar por string
+			return typeof this.prioridade
+		},
 	},
 	data() {
 		return {
 			mensagem : '',
 			caracteristicas: [],
 			produto: 'web', 
+			prioridade: 1,
+			prioridades: [
+				//objetos
+				{ codigo: 1, nome: 'Baixa'},
+				{ codigo: 2, nome: 'Media'},
+				{ codigo: 3, nome: 'Alta'}
+			],
 			usuario: { // é bom por os dados aqui pra ficar claro, mas se nao por ainda funciona
 				email: '',
 				senha: '',
