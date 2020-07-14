@@ -4,7 +4,12 @@
 		<hr>
 		<b-button variant="primary" class="mb-4"
 		@click="exibir = !exibir">Mostrar Mensagem</b-button> <!--faz com que exiba ou nao o botao -->
-		<transition>
+
+		<transition name="fade"> <!--é importante por o nome aqui, se nao ia substituir por um simples v- , e os .fade da parte de baixo do css precisa disso-->
+			<b-alert variant="info" show v-if="exibir">{{ msg }}</b-alert>
+		</transition>
+
+		<transition name="slide"> <!--é importante por o nome aqui, se nao ia substituir por um simples v- , e os .fade da parte de baixo do css precisa disso-->
 			<b-alert variant="info" show v-if="exibir">{{ msg }}</b-alert>
 		</transition>
 	</div>
@@ -32,4 +37,31 @@ export default {
 	margin-top: 60px;
 	font-size: 1.5rem;
 }
+
+/* é necessário a entrada e saída tem opacity 0 pra animacao ficar suave */
+.fade-enter, .fade-leave-to {
+	opacity: 0;
+}
+
+.fade-enter-active, .fade-leave-active  {
+	transition: opacity 2s;
+}
+
+@keyframes slide-in {
+	from { transform: translateY(40px); }
+	to { transform: translateY(0);}
+}
+
+@keyframes slide-out {
+	from { transform: translateY(40px); }
+}
+
+.slide-enter-active {
+	animation: slide-in 2s ease;
+}
+
+.slide-leave-active {
+	animation: slide-in 2s ease;
+}
+
 </style>
