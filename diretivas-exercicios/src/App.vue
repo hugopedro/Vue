@@ -4,13 +4,18 @@
 		<hr>
 		<p v-text="'Usando diretivas v-text'"></p>
 		<hr>
-		<p v-destaque>Usando diretiva personalizada</p>
+		<p v-destaque="'blue'">Usando diretiva personalizada</p> <!-- se for passar string tem que usar aspas simples -->
+		<p v-destaque="cor">Usando diretiva personalizada</p>
 	</div>
 </template>
 
 <script>
 export default {
-	
+	data() {
+		return {
+			cor: 'red'
+		}
+	}
 }
 </script>
 
