@@ -7,7 +7,7 @@
 		<p v-destaque:fundo.atrasar="'lightblue'">Usando diretiva personalizada</p> <!-- se for passar string tem que usar aspas simples -->
 		<p v-destaque.atrasar="cor">Usando diretiva personalizada</p>
 		<hr>
-		<p v-destaque-local:fundo.atrasar="'lightblue'">Usando diretiva personalizada</p> <!-- se for passar string tem que usar aspas simples -->
+		<p v-destaque-local:fundo.atrasar.alternar="'lightblue'">Usando diretiva personalizada</p> <!-- se for passar string tem que usar aspas simples -->
 		<p v-destaque-local.atrasar="cor">Usando diretiva personalizada</p>
 
 		<!-- <p v-teste:argumento.mod1.mod2.mod3="'valor'"></p> -->
@@ -23,20 +23,33 @@ export default {
 	directives: {
 		'destaque-local' : {
 			bind(el, binding, vnode) {
-				// el.style.backgroundColor = 'lightgreen'
+				const aplicarCor = cor => {
+					if (binding.arg === 'fundo') {
+						el.style.backgroundColor = cor
+					} else {
+						el.style.color = cor
+					}
+				}
 
 				let atraso = 0
 				if (binding.modifiers['atrasar']) atraso = 3000 //usando modificador pra atrasar
 
+				const cor1 = binding.value
+				const cor2 = 'purple'
+				let corAtual = cor1
+
 				setTimeout(() => {
-					if (binding.arg === 'fundo') {
-						el.style.backgroundColor = binding.value
-					} else {
-						el.style.color = binding.value
-					}
-				}, atraso )
-			}
+				if (binding.modifiers['alternar']) {
+					setInterval(() => {
+						corAtual = corAtual === cor1 ? cor2 : cor1
+						aplicarCor(corAtual)
+					}, 1000)
+				} else {
+					aplicarCor(binding.value)
 				}
+			}, atraso )
+		}
+	}
 	},
 	data() {
 		return {
