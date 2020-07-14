@@ -4,20 +4,7 @@ import App from './App.vue'
 Vue.config.productionTip = false
 
 Vue.directive('destaque', {
-	bind(el, binding, vnode) {
-		// el.style.backgroundColor = 'lightgreen'
-
-		let atraso = 0
-		if (binding.modifiers['atrasar']) atraso = 3000 //usando modificador pra atrasar
-
-		setTimeout(() => {
-			if (binding.arg === 'fundo') {
-				el.style.backgroundColor = binding.value
-			} else {
-				el.style.color = binding.value
-			}
-		}, atraso )
-	}
+	
 })
 
 
