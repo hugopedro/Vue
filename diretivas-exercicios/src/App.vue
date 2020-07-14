@@ -4,8 +4,8 @@
 		<hr>
 		<p v-text="'Usando diretivas v-text'"></p>
 		<hr>
-		<p v-destaque:fundo="'lightblue'">Usando diretiva personalizada</p> <!-- se for passar string tem que usar aspas simples -->
-		<p v-destaque="cor">Usando diretiva personalizada</p>
+		<p v-destaque:fundo.atrasar="'lightblue'">Usando diretiva personalizada</p> <!-- se for passar string tem que usar aspas simples -->
+		<p v-destaque.atrasar="cor">Usando diretiva personalizada</p>
 
 		<!-- <p v-teste:argumento.mod1.mod2.mod3="'valor'"></p> -->
 
