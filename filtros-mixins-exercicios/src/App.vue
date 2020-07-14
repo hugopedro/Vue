@@ -3,6 +3,7 @@
 		<h1>Filtros & Mixins</h1>
 		<hr>
 		<p>{{ cpf | cpf | inverter }}</p> <!-- o pipe | faz mostrar com os filtros, o da esquerda é o valor bruto e segundo 'arrumado'-->
+		<input type="text" :value="cpf | cpf">
 	</div>
 </template>
 
@@ -36,4 +37,10 @@ export default {
 	margin-top: 60px;
 	font-size: 2.5rem;
 }
+
+input {
+	font-size: 2.5rem;
+}
+
+
 </style>
