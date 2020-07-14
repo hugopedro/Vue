@@ -2,7 +2,7 @@
 	<div id="app">
 		<h1>Filtros & Mixins</h1>
 		<hr>
-		<p>{{ cpf | cpf }}</p> <!-- o pipe | faz mostrar com os filtros, o da esquerda é o valor bruto e segundo 'arrumado'-->
+		<p>{{ cpf | cpf | inverter }}</p> <!-- o pipe | faz mostrar com os filtros, o da esquerda é o valor bruto e segundo 'arrumado'-->
 	</div>
 </template>
 
@@ -10,7 +10,7 @@
 export default {
 	filters: {
 		cpf(valor) { //filtro é uma funcao que recebe um valor e transforma e retorna
-			const arr = valor.split('')
+			const arr = `${valor}`.split('')
 			arr.splice(3, 0, '.')
 			arr.splice(7, 0, '.')
 			arr.splice(11, 0, '-')
