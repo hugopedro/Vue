@@ -12,7 +12,7 @@
 
 import questions from './util/questions'
 import Question from './components/Question.vue'
-import Result from './components/Resul.vue'
+import Result from './components/Result.vue'
 
 export default {
 	components: { Question, Result},

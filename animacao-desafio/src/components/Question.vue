@@ -1,7 +1,7 @@
 <template>
     <div class="question">
       <span>{{ question.text }}</span>
-      <ul class="answer">
+      <ul class="answers"> <!--cuidado porque se por no singular por engano da erro -->
           <li v-for="(answer, i) in question.answers" :key="answer.text">
               <span class="number">{{ i + 1 }}</span>
               <span class="text">{{ answer.text }}</span>
