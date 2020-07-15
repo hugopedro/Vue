@@ -81,10 +81,13 @@
 
 	<hr>
 	<b-button @click="adicionarAluno" class="mb-4">Adicionar Aluno</b-button>
+	<transition-group name="slide" tag="div"> <!-- Na hora de renderizar-->
 	<b-list-group v-for="(aluno, i) in alunos" :key="aluno">
 		<b-list-group-item @click="removerAluno(i)">{{ aluno }}</b-list-group-item>
 	</b-list-group>
-
+	</transition-group>
+<!-- NA HORA DE TOMAR A DECISÃO DE QUAL ELEMENTO VAI ENVOLVER NO TRANSITION-GROUP, TEM QUE SER O QUE TIVER FOR PRA PODER PROPAGAR -->
+<!-- E SÓ FUNCIONA SE TIVER :key !  -->
 
   </div>
 </template>
