@@ -23,6 +23,21 @@
 			<b-alert variant="info" show v-if="exibir" key="info">{{ msg }}</b-alert>
 			<b-alert variant="warning" show v-else key="warn">{{ msg }}</b-alert> <!-- v-show nao pode -->
 		</transition> <!--o key é pra poder funcionar as animacoes, mode é importante pra nao bugar, primeiro o elemento da out dps in -->
+		<hr>
+		<button @click="exibir2 = !exibir2">Mostrar</button>
+		<transition
+			@before-enter="beforeEnter"
+			@enter="enter"
+			@after-enter="afterEnter"
+			@enter-cancelled="enterCancelled"
+			
+			@before-leave="beforeLeave"
+			@leave="leave" 
+			@after-leave="afterLeave"
+			@leave-cancelled="leaveCancelled">
+			<div v-if="exibir2" class="caixa"></div>
+		</transition>
+		
 	</div>
 </template>
 
@@ -33,8 +48,39 @@ export default {
 		return {
 			msg: 'Uma mensagem de informação para o usuário!',
 			exibir: false,
-			tipoAnimacao: 'fade'
+			tipoAnimacao: 'fade',
+			exibir2: true
 		}
+	},
+	methods: {
+		beforeEnter(el) {
+			console.log('beforeEnter')
+		},
+		enter(el, done) { // done é uma funcao que será chamada quando a animacao for concluida, o vue nao tem como saber qd a
+						//animacao foi concluida, entao ele nao vai poder avançar pra linha 31
+			console.log('enter')
+			done()
+		},
+		afterEnter(el) {
+			console.log('afterEnter')
+		},
+		enterCancelled() {
+			console.log('enterCancelled')
+		},
+		beforeLeave(el) {
+			console.log('beforeLeave')
+		},
+		leave(el, done) { // done é uma funcao que será chamada quando a animacao for concluida, o vue nao tem como saber qd a
+						//animacao foi concluida, entao ele nao vai poder avançar pra linha 31
+			console.log('leave')
+			done()
+		},
+		afterLeave(el) {
+			console.log('afterLeave')
+		},
+		leaveCancelled() {
+			console.log('leaveCancelled')
+		},
 	}
 }
 </script>
@@ -48,6 +94,13 @@ export default {
 	color: #2c3e50;
 	margin-top: 60px;
 	font-size: 1.5rem;
+}
+
+.caixa {
+	height: 100px;
+	width: 300px;
+	margin: 30px auto;
+	background-color: lightgreen;
 }
 
 /* é necessário a entrada e saída tem opacity 0 pra animacao ficar suave */
