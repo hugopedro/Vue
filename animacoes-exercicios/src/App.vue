@@ -19,9 +19,10 @@
 			<option value="slide">Slide</option>
 		</b-select>
 
-		<transition :name="tipoAnimacao"> <!--é importante por o nome aqui, se nao ia substituir por um simples v- , e os .fade da parte de baixo do css precisa disso-->
-			<b-alert variant="info" show v-show="exibir">{{ msg }}</b-alert>
-		</transition>
+		<transition :name="tipoAnimacao" mode="out-in"> <!--é importante por o nome aqui, se nao ia substituir por um simples v- , e os .fade da parte de baixo do css precisa disso-->
+			<b-alert variant="info" show v-if="exibir" key="info">{{ msg }}</b-alert>
+			<b-alert variant="warning" show v-else key="warn">{{ msg }}</b-alert> <!-- v-show nao pode -->
+		</transition> <!--o key é pra poder funcionar as animacoes, mode é importante pra nao bugar, primeiro o elemento da out dps in -->
 	</div>
 </template>
 
