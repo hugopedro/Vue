@@ -1,139 +1,226 @@
 <template>
-	<div id="app" class="container-fluid">
-		<h1>Animações</h1>
-		<hr>
-		<b-button variant="primary" class="mb-4"
-		@click="exibir = !exibir">Mostrar Mensagem</b-button> <!--faz com que exiba ou nao o botao -->
-<!--
-		<transition name="fade"> é importante por o nome aqui, se nao ia substituir por um simples v- , e os .fade da parte de baixo do css precisa disso-->
-	<!--		<b-alert variant="info" show v-if="exibir">{{ msg }}</b-alert>
-		</transition> 
+  <div id="app" class="container-fluid">
+    <h1>Animações</h1>
+    <hr>
+    <b-button
+      variant="primary"
+      class="mb-4"
+      @click="exibir = !exibir"
+    >
+      Mostrar Mensagem
+    </b-button>
+    <transition name="fade">
+      <b-alert variant="info" show v-if="exibir">{{ msg }}</b-alert>
+    </transition>
+    <transition name="slide" type="animation">
+      <b-alert variant="info" show v-if="exibir">{{ msg }}</b-alert>
+    </transition>
+    <transition name="slide" type="animation" appear>
+      <b-alert variant="info" show v-if="true">{{ msg }}</b-alert>
+    </transition>
 
-	<!--	<transition name="slide" type="animation"> <!--é importante por o nome aqui, se nao ia substituir por um simples v- , e os .fade da parte de baixo do css precisa disso-->
-	<!--		<b-alert variant="info" show v-show="exibir">{{ msg }}</b-alert>
-		</transition> -->
+    <hr>
 
-		<hr>
-		<b-select v-model="tipoAnimacao" class="mb-4">
-			<option value="fade">Fade</option>
-			<option value="slide">Slide</option>
-		</b-select>
+    <transition
+      enter-active-class="animated bounce"
+      leave-active-class="animated shake"
+    >
+      <b-alert variant="info" show v-show="exibir">{{ msg }}</b-alert>
+    </transition>
 
-		<transition :name="tipoAnimacao" mode="out-in"> <!--é importante por o nome aqui, se nao ia substituir por um simples v- , e os .fade da parte de baixo do css precisa disso-->
-			<b-alert variant="info" show v-if="exibir" key="info">{{ msg }}</b-alert>
-			<b-alert variant="warning" show v-else key="warn">{{ msg }}</b-alert> <!-- v-show nao pode -->
-		</transition> <!--o key é pra poder funcionar as animacoes, mode é importante pra nao bugar, primeiro o elemento da out dps in -->
-		<hr>
-		<button @click="exibir2 = !exibir2">Mostrar</button>
-		<transition
-			@before-enter="beforeEnter"
-			@enter="enter"
-			@after-enter="afterEnter"
-			@enter-cancelled="enterCancelled"
-			
-			@before-leave="beforeLeave"
-			@leave="leave" 
-			@after-leave="afterLeave"
-			@leave-cancelled="leaveCancelled">
-			<div v-if="exibir2" class="caixa"></div>
-		</transition>
-		
-	</div>
+
+    <hr>
+    <b-select v-model="tipoAnimacao" class="mb-4">
+      <option value="fade">Fade</option>
+      <option value="slide">Slide</option>
+    </b-select>
+    <transition :name="tipoAnimacao" mode="out-in">
+      <b-alert variant="info" show v-if="exibir" key="info">{{ msg }}</b-alert>
+      <b-alert variant="warning" show v-else key="warn">{{ msg }}</b-alert>
+    </transition>
+
+
+    <hr>
+    <button @click="exibir2 = !exibir2">Alternar</button>
+    <transition
+      :css="false"
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @after-enter="afterEnter"
+      @enter-cancelled="enterCancelled"
+
+      @before-leave="beforeLeave"
+      @leave="leave"
+      @after-leave="afterLeave"
+      @leave-cancelled="leaveCancelled"
+    >
+      <div v-if="exibir2" class="caixa"></div>
+    </transition>
+
+
+    <hr>
+    <div class="mb-4">
+      <b-button
+        variant="info" class="mr-2"
+        @click="componenteSelecionado = 'AlertaInfo'">
+        Info
+      </b-button>
+      <b-button
+        variant="warning"
+        @click="componenteSelecionado = 'AlertaAdvertencia'">
+        Warn
+      </b-button>
+    </div>
+    <transition name="fade" mode="out-in">
+      <component :is="componenteSelecionado"></component>
+    </transition>
+
+
+  </div>
 </template>
 
 <script>
+  import AlertaAdvertencia from './AlertaAdvertencia'
+  import AlertaInfo from './AlertaInfo'
 
-export default {
-	data() {
-		return {
-			msg: 'Uma mensagem de informação para o usuário!',
-			exibir: false,
-			tipoAnimacao: 'fade',
-			exibir2: true
-		}
-	},
-	methods: {
-		beforeEnter(el) {
-			console.log('beforeEnter')
-		},
-		enter(el, done) { // done é uma funcao que será chamada quando a animacao for concluida, o vue nao tem como saber qd a
-						//animacao foi concluida, entao ele nao vai poder avançar pra linha 31
-			console.log('enter')
-			done()
-		},
-		afterEnter(el) {
-			console.log('afterEnter')
-		},
-		enterCancelled() {
-			console.log('enterCancelled')
-		},
-		beforeLeave(el) {
-			console.log('beforeLeave')
-		},
-		leave(el, done) { // done é uma funcao que será chamada quando a animacao for concluida, o vue nao tem como saber qd a
-						//animacao foi concluida, entao ele nao vai poder avançar pra linha 31
-			console.log('leave')
-			done()
-		},
-		afterLeave(el) {
-			console.log('afterLeave')
-		},
-		leaveCancelled() {
-			console.log('leaveCancelled')
-		},
-	}
-}
+  export default {
+    components: { AlertaAdvertencia, AlertaInfo },
+    data() {
+      return {
+        msg: 'Uma mensagem de informação para o usuario!',
+        exibir: false,
+        tipoAnimacao: 'fade',
+
+        exibir2: true,
+        larguraBase: 0,
+
+        componenteSelecionado: ''
+      }
+    },
+    methods: {
+      beforeEnter( el ) {
+        console.log( 'beforeEnter' )
+        this.larguraBase = 0
+        el.style.width = `${ this.larguraBase }px`
+      },
+      enter( el, done ) {
+        console.log( 'enter' )
+        let rodada = 1
+        let temporizador = setInterval( () => {
+          const novaLargura = this.larguraBase + rodada * 10
+          el.style.width = `${ novaLargura }px`
+          rodada++
+          if ( rodada > 30 ) {
+            clearInterval( temporizador )
+            done()
+          }
+        }, 20 )
+      },
+      afterEnter( el ) {
+        console.log( 'afterEnter' )
+      },
+      enterCancelled( el ) {
+        console.log( 'enterCancelled' )
+      },
+      beforeLeave( el ) {
+        console.log( 'beforeLeave' )
+        this.larguraBase = 300
+        el.style.width = `${ this.larguraBase }px`
+      },
+      leave( el, done ) {
+        console.log( 'leave' )
+        let rodada = 1
+        let temporizador = setInterval( () => {
+          const novaLargura = this.larguraBase - rodada * 10
+          el.style.width = `${ novaLargura }px`
+          rodada++
+          if ( rodada > 30 ) {
+            clearInterval( temporizador )
+            done()
+          }
+        }, 20 )
+      },
+      afterLeave( el ) {
+        console.log( 'afterLeave' )
+      },
+      leaveCancelled( el ) {
+        console.log( 'leaveCancelled' )
+      },
+
+    },
+  }
 </script>
 
-<style>
-#app {
-	font-family: 'Avenir', Helvetica, Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
-	color: #2c3e50;
-	margin-top: 60px;
-	font-size: 1.5rem;
-}
+<style lang="scss">
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+    font-size: 1.5rem;
+  }
 
-.caixa {
-	height: 100px;
-	width: 300px;
-	margin: 30px auto;
-	background-color: lightgreen;
-}
+  /* FADE */
+  .fade {
+    &-enter,
+    &-leave-to {
+      opacity: 0;
+    }
 
-/* é necessário a entrada e saída tem opacity 0 pra animacao ficar suave */
-.fade-enter, .fade-leave-to {
-	opacity: 0;
-}
+    &-enter-active,
+    &-leave-active {
+      transition: opacity 1s;
+    }
+  }
 
-.fade-enter-active, .fade-leave-active  {
-	transition: opacity 2s;
-}
 
-@keyframes slide-in {
-	from { transform: translateY(40px); }
-	to { transform: translateY(0);}
-}
+  /* SLIDE */
+  @keyframes slide-in {
+    from {
+      transform: translateY(40px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
 
-@keyframes slide-out {
-	from { transform: translateY(40px); }
-	to { transform: translateY(0); }
-}
+  @keyframes slide-out {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(40px);
+    }
+  }
 
-.slide-enter-active {
-	animation: slide-in 2s ease;
-	transition: opacity 2s;
+  .slide {
+    &-enter-active {
+      animation: slide-in 1s ease;
+    }
 
-}
+    &-leave-active {
+      animation: slide-out 1s linear;
+    }
 
-.slide-leave-active {
-	animation: slide-in 2s ease;
-	transition: opacity 2s;
-}
+    &-enter,
+    &-leave-to {
+      opacity: 0;
+    }
 
-.slide-enter, .slide-leave-to {
-	opacity: 0;
-}
+    &-enter-active,
+    &-leave-active {
+      transition: opacity 1s;
+    }
+  }
+
+
+  /* CAIXA */
+  .caixa {
+    height: 100px;
+    width: 300px;
+    margin: 30px auto;
+    background-color: lightgreen;
+  }
 </style>
