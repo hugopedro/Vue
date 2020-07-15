@@ -16,7 +16,18 @@ Vue.use({
             //        config.method = 'put' //put salva o registro e exclui todos os outros
             //    }
             return config
-           })
+           }, error => Promise.reject(error)) // é só pra falar qual erro que deu se der
+
+           Vue.prototype.$http.interceptors.response.use(res => { // por enquanto pega-se o objeto, vamos testar agora com array
+                // const array = []
+                // for (let chave in res.data ) { // for navega encima da chave
+                //     array.push({ id: chave, ...res.data[chave] }) // o ... quer dizer que ele vai pegar todos os atributos
+                // }
+
+                // res.data = array 
+                return res
+
+           }, error => Promise.reject(error))
         
     }
 })
