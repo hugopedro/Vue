@@ -2,9 +2,11 @@
 	<div id="app">
 		<h1>Super Quiz</h1>
 		<Question v-if="questionMode"
-			:question="questions[currentQuestions]" />
+			:question="questions[currentQuestions]"
+			@answered="showResult" />
 		<Result v-else
-			:result="result" />
+			:result="result"
+			@confirmed="nextQuestion" />
 	</div>
 </template>
 
@@ -22,6 +24,17 @@ export default {
 			questionMode: true,
 			questions, // é equivalente a questions: questions
 			currentQuestions: 0
+		}
+	},
+	methods: {
+		showResult(result) {
+			this.result = result
+			this.questionMode = false
+		},
+		nextQuestion() {
+			let r = Math.random() * this.questions.length
+			this.currentQuestions = parseInt(r)
+			this.questionMode = true
 		}
 	}
 }
