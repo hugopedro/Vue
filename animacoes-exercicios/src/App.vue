@@ -9,6 +9,8 @@
     >
       Mostrar Mensagem
     </b-button>
+
+	<!--
     <transition name="fade">
       <b-alert variant="info" show v-if="exibir">{{ msg }}</b-alert>
     </transition>
@@ -75,6 +77,14 @@
       <component :is="componenteSelecionado"></component>
     </transition>
 
+	-->
+
+	<hr>
+	<b-button @click="adicionarAluno" class="mb-4">Adicionar Aluno</b-button>
+	<b-list-group v-for="(aluno, i) in alunos" :key="aluno">
+		<b-list-group-item @click="removerAluno(i)">{{ aluno }}</b-list-group-item>
+	</b-list-group>
+
 
   </div>
 </template>
@@ -87,6 +97,7 @@
     components: { AlertaAdvertencia, AlertaInfo },
     data() {
       return {
+		alunos: ['Roberto', 'Julia', 'Teresa', 'Paulo'],
         msg: 'Uma mensagem de informação para o usuario!',
         exibir: false,
         tipoAnimacao: 'fade',
@@ -98,6 +109,14 @@
       }
     },
     methods: {
+	
+	adicionarAluno() {
+		const s = Math.random().toString(36).substring(2) // isso é só pra gerar letras aleatorias
+		this.alunos.push(s) // é pra gerar uma string
+	},
+	removerAluno(indice) {
+		this.alunos.splice(indice, 1) //cuidado porque tem que ser alunos no plural
+	},
       beforeEnter( el ) {
         console.log( 'beforeEnter' )
         this.larguraBase = 0
