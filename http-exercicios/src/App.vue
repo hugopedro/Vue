@@ -24,7 +24,11 @@
 				<strong>Nome:</strong> {{ usuario.nome }} <br>
 				<strong>Email: </strong> {{ usuario.email }} <br>
 				<strong>ID: </strong> {{ id }}
-				</b-list-group-item>
+				<b-button variant="warning" size="lg"
+				@click="carregar(id)">Carregar</b-button>
+				<b-button variant="danger" size="lg" class="ml-2"
+				@click="excluir(id)">Excluir</b-button>
+				</b-list-group-item> <br>
 		</b-list-group>
 	</div>
 </template>
@@ -34,6 +38,7 @@ export default {
 	data() {
 		return {
 			usuarios: [],
+			id: null,
 			usuario: {
 				nome: '',
 				email: ''
@@ -41,12 +46,23 @@ export default {
 		}
 	},
 	methods: {
+		limpar() {
+			this.usuario.nome = ''
+			this.usuario.email = ''
+			this.id = null
+		},
+		carregar(id) {
+			this.id = id
+			this.usuario = { ...this.usuarios[id] }
+		},
+		excluir(id) { //depois de excluir then (entao) limpa
+			this.$http.delete(`/usuarios/${id}.json`).then(_ => this.limpar())
+		},
 		salvar() {
-			this.$http.post('usuarios.json', this.usuario)
-			.then(resp => {
-				this.usuario.nome = ''
-				this.usuario.email = ''
-			})
+			const metodo = this.id ? 'patch' : 'post' // se o método tiver setado ele faz "patch" se nao "post"
+			const finalUrl = this.id ? `/${this.id}.json` : '.json'
+			this.$http[metodo](`/usuarios${finalUrl}`, this.usuario) //` é concatenar
+				.then(_ => this.limpar()) //agora o método salvar serve tanto para alterar um elemento tanto para incluir novos el.
 		},
 
 		obterUsuarios() { // consultar com get, nao precisa por .get após o $http que vai direto
