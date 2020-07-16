@@ -6,6 +6,7 @@ import Usuario from './components/usuario/Usuario'
 Vue.use(Router) // atenção aqui pois é com letra maiuscula
 
 export default new Router({
+    mode: 'history',
     routes: [{
         path: '/',
         component: Inicio
