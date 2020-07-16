@@ -1,6 +1,8 @@
 <template>
 	<div id="app" class="container">
 		<h1>HTTP com Axios</h1>
+		<b-alert show dismissible v-for="mensagem in mensagens" :key="mensagem.texto"
+		:variant="mensagem.tipo"> {{ mensagem.texto }}</b-alert>
 		<b-card>
 			<b-form-group label="Nome">
 				<b-form-input type="text" size="lg"
@@ -37,6 +39,7 @@
 export default {
 	data() {
 		return {
+			mensagens: [],
 			usuarios: [],
 			id: null,
 			usuario: {
@@ -50,19 +53,33 @@ export default {
 			this.usuario.nome = ''
 			this.usuario.email = ''
 			this.id = null
+			this.mensagens = []
 		},
 		carregar(id) {
 			this.id = id
 			this.usuario = { ...this.usuarios[id] }
 		},
 		excluir(id) { //depois de excluir then (entao) limpa
-			this.$http.delete(`/usuarios/${id}.json`).then(_ => this.limpar())
+			this.$http.delete(`/usuarios/${id}.json`)
+			.then(_ => this.limpar())
+			.catch(err => {
+				this.mensagens.push({
+					texto: 'Problema para excluir!',
+					tipo: 'danger'
+				})
+			})
 		},
 		salvar() {
 			const metodo = this.id ? 'patch' : 'post' // se o método tiver setado ele faz "patch" se nao "post"
 			const finalUrl = this.id ? `/${this.id}.json` : '.json'
 			this.$http[metodo](`/usuarios${finalUrl}`, this.usuario) //` é concatenar
-				.then(_ => this.limpar()) //agora o método salvar serve tanto para alterar um elemento tanto para incluir novos el.
+				.then(_ => {
+					this.limpar() //agora o método salvar serve tanto para alterar um elemento tanto para incluir novos el.
+					this.mensagens.push({
+						texto: 'Operação realizada com sucesso!',
+						tipo: 'success'
+					})
+				}) 
 		},
 
 		obterUsuarios() { // consultar com get, nao precisa por .get após o $http que vai direto
