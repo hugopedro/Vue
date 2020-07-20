@@ -11,7 +11,8 @@ export default new Router({
         path: '/',
         component: Inicio
     }, {
-        path: '/usuario',
-        component: Usuario
+        path: '/usuario/:id', //Significa que a rota nao é só usuário, agora é usuário/ algum numero
+        component: Usuario,
+        props: true //significa que todos oa parametros da rota serão passado como propiedade do componente
     }]
 })
