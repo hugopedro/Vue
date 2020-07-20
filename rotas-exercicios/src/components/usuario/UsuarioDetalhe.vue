@@ -15,8 +15,14 @@
  
 <script>
 export default {
-    props: ['id'],  
-    
+    props: ['id'],
+    beforeRouteEnter(to, from , next) { // nesse caso nao tem funçao methods()
+        console.log('dentro do componente -> usuário detalhe')
+        const autenticado = true
+        autenticado ? next() : next(false)
+        next()
+    }
+     
     // data() { //método ultrapassado de passar parâmetro
     //     return {
     //         id: this.$route.params.id
