@@ -5,7 +5,8 @@
       <!-- :to="`/usuario/${id}/editar`" --> <!-- Pode ser só {{ id }} pois a props já tá definindo-->
       <router-link tag="button" primario
         :to="{ name: 'editarUsuario', params: {id },
-        query: {completo: false, lingua: 'en'} }" > <!-- tag button para renderizar, primario do style.css-->
+        query: {completo: false, lingua: 'en'},
+        hash: '#rodape' }" > <!-- tag button para renderizar, primario do style.css-->
         <!-- o atributo query define um objeto chave-valor para passar na query string esses dados-->
            Editar
       </router-link>
