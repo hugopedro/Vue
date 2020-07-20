@@ -2,8 +2,7 @@
   <nav class="menu">
       <ul>
          <router-link to="/" tag="li" active-class="active" exact><a>Inicio</a></router-link>  
-         <router-link to="/usuario/1" tag="li" active-class="active" exact><a>Usuário 1</a></router-link> <!--equivale ao codigo comentado abaixo, é a melhor prática -->
-         <router-link to="/usuario/2" tag="li" active-class="active" exact><a>Usuário 2</a></router-link> <!--equivale ao codigo comentado abaixo, é a melhor prática -->
+         <router-link to="/usuario" tag="li" active-class="active" exact><a>Usuárip</a></router-link> <!--equivale ao codigo comentado abaixo, é a melhor prática -->
       </ul> <!--o active-class="active" exact funciona pra ao clicar na guia só a guia clicada ficar ativa usando o estilo, entao é importante -->
       <!-- <ul>
           <li>
