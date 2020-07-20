@@ -35,5 +35,12 @@ export default new Router({
             { path: ':id/editar', component: UsuarioEditar, props: true,
                 name: 'editarUsuario' },
         ]
+    }, {
+        path: '/redirecionar', //eé um testezinho, se for lá na url e por /redirecionar ele vai cair na pagina usuario
+        redirect: '/usuario',
+    },
+        {
+            path: '*', //pega qualquer coisa que for digitada na url
+            redirect: '/' //redireciona pro inicio, é a rota "pega-tudo"
     }]
 })
