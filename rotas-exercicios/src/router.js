@@ -11,16 +11,18 @@ Vue.use(Router) // atenção aqui pois é com letra maiuscula
 export default new Router({
     mode: 'history',
     routes: [{
+        name: 'inicio',
         path: '/',
         component: Inicio
     }, {
-        path: '/usuario/', //Significa que a rota nao é só usuário, agora é usuário/ algum numero
+        path: '/usuario', //Significa que a rota nao é só usuário, agora é usuário/ algum numero
         component: Usuario,
         props: true, //significa que todos oa parametros da rota serão passado como propiedade do componente
         children: [
             { path: '', component: UsuarioLista},
             { path: ':id', component: UsuarioDetalhe, props: true},
-            { path: ':id/editar', component: UsuarioEditar, props: true},
+            { path: ':id/editar', component: UsuarioEditar, props: true,
+                name: 'editarUsuario' },
         ]
     }]
 })

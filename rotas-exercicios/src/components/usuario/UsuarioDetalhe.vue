@@ -2,12 +2,14 @@
   <div class="usuario-detalhe">
       <h3>Usuário Detalhe</h3>
       <p><strong>Código: </strong> {{ id }}</p>
-      <router-link tag="button" primario :to="`/usuario/${id}/editar`"> <!-- tag button para renderizar, primario do style.css-->
+      <!-- :to="`/usuario/${id}/editar`" --> <!-- Pode ser só {{ id }} pois a props já tá definindo-->
+      <router-link tag="button" primario
+        :to="{ name: 'editarUsuario', params: {id } }" > <!-- tag button para renderizar, primario do style.css-->
            Editar
       </router-link>
   </div>
 </template>
-
+ 
 <script>
 export default {
     props: ['id'],  
