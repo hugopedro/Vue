@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Inicio from './components/Inicio'
+import Menu from './components/template/Menu'
+import MenuAlt from './components/template/Menu'
 import Usuario from './components/usuario/Usuario'
 import UsuarioLista from './components/usuario/UsuarioLista'
 import UsuarioDetalhe from './components/usuario/UsuarioDetalhe'
@@ -13,10 +15,19 @@ export default new Router({
     routes: [{
         name: 'inicio',
         path: '/',
-        component: Inicio
+        // component: Inicio
+        components: {
+            default: Inicio,
+            menu: Menu
+        }
     }, {
         path: '/usuario', //Significa que a rota nao é só usuário, agora é usuário/ algum numero
-        component: Usuario,
+        // component: Usuario,
+        components: {
+            default: Usuario,
+            menu: MenuAlt,
+            menuInferior: MenuAlt
+        },
         props: true, //significa que todos oa parametros da rota serão passado como propiedade do componente
         children: [
             { path: '', component: UsuarioLista},
