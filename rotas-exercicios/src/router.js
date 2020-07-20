@@ -3,12 +3,17 @@ import Router from 'vue-router'
 import Inicio from './components/Inicio'
 import Menu from './components/template/Menu'
 import MenuAlt from './components/template/Menu'
-import Usuario from './components/usuario/Usuario'
-import UsuarioLista from './components/usuario/UsuarioLista'
-import UsuarioDetalhe from './components/usuario/UsuarioDetalhe'
-import UsuarioEditar from './components/usuario/UsuarioEditar'
+// import Usuario from './components/usuario/Usuario'
+// import UsuarioLista from './components/usuario/UsuarioLista'
+// import UsuarioDetalhe from './components/usuario/UsuarioDetalhe'
+// import UsuarioEditar from './components/usuario/UsuarioEditar'
 
-Vue.use(Router) // atenção aqui pois é com letra maiuscula
+Vue.use(Router) // atenção aqui pois é com letra maiuscula, o webpack serve para usar na hora do agrupamento de componentes
+// então isso é ótimo para grandes aplicações, pois só vai carregar o que for necessário na ocasião necessária
+const Usuario = () => import(/* webpackChunkName: "usuario" */'./components/usuario/Usuario')
+const UsuarioLista = () => import(/* webpackChunkName: "usuario" */'./components/usuario/UsuarioDetalhe')
+const UsuarioDetalhe = () => import(/* webpackChunkName: "usuario" */'./components/usuario/UsuarioLista')
+const UsuarioEditar = () => import(/* webpackChunkName: "usuario" */'./components/usuario/UsuarioEditar') // é uma função callback, entao ele importa e guarda na variavel
 
 const router =  new Router({
     mode: 'history',
