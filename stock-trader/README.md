@@ -1,4 +1,4 @@
-# comunicacao
+# stock-trader
 
 ## Project setup
 ```
