@@ -33,7 +33,7 @@ export default {
     },
     getters: { //retorna todas as ações do portfólio
         stockPortfolio(state, getters) { // o 2º parâmetro é todas os getters da aplicação
-            return state.stock.map(stock => {
+            return state.stocks.map(stock => {
                 //transformações pra tornar o registro completo
                 const record = getters.stocks.find(element => element.id == stock.id)
                 return { //retorna o objeto completo

@@ -22,6 +22,8 @@
 </template>
 
 <script>
+
+import { mapActions } from 'vuex'
 export default {
     props: ['stock'],
     data() {
@@ -30,14 +32,15 @@ export default {
         }
     },
     methods: {
-        buyStock() {
+        ...mapActions([{sellStockAction: 'sellStock'}]),
+        sellStock() {
             const order = {
                 stockId : this.stock.id,
                 stockPrice : this.stock.price,
                 quantity : this.quantity
             }
 
-            this.$store.dispatch('buyStock', order)
+            this.sellStockAction(order)
             this.quantity = 0 //é pra quando ele comprar nao ficar resquício do valor na caixa
         }
     }
