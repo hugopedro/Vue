@@ -13,7 +13,7 @@ export default {
         //a primeira action é a de comprar a ação
         //o commit é responsável por chamar a mutation
         buyStock({ commit }, order){
-            commit() // por enquanto commit vazio
+            commit('buyStock', order)
         }, // a ordem é justamente a que criei em socks/Stock.vue  
         initStocks({ commit }) {
             //aqui é que inicializa as ações

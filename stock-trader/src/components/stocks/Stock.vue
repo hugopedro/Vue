@@ -33,7 +33,7 @@ export default {
                 quantity : this.quantity
             }
 
-            console.log(order)
+            this.$store.dispatch('buyStock', order)
             this.quantity = 0 //é pra quando ele comprar nao ficar resquício do valor na caixa
         }
     }
