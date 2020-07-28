@@ -4,7 +4,7 @@
             <v-card-title class="headline">
                 <strong>{{ stock.name }} 
                   <small>
-                    (Preço: {{ stock.price | currency }}) | Qtde: {{ stock.quantity }}
+                    (Preço: {{ stock.price | currency }} | Qtde: {{ stock.quantity }})
                   </small>
                 </strong>
             </v-card-title>
@@ -16,7 +16,7 @@
                     v-model.number="quantity"></v-text-field>
                 <v-btn class="blue darken-3 white--text"
                 :disabled="insufficientQuantity || quantity <=0 || !Number.isInteger(quantity)"
-                    @click="sellStock ">{{insufficientFunds ? 'Insuficiente' : 'Vender'}}</v-btn>
+                    @click="sellStock ">{{insufficientQuantity ? 'Insuficiente' : 'Vender'}}</v-btn>
             </v-container>
         </v-card>
     </v-flex>
@@ -38,7 +38,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions([{sellStockAction: 'sellStock'}]),
+        ...mapActions({sellStockAction: 'sellStock'}),
         sellStock() {
             const order = {
                 stockId : this.stock.id,

@@ -21,7 +21,7 @@ export default {
             if (record.quantity > quantity) { // se a qtd de ações que eu tenho é maior que a qtd de ações q eu quero vender
                 record.quantity -= quantity // se sim subtrai
             } else { // do contrário vende todas as ações
-                state.stock.splice(state.stocks.indexOf(record), 1)
+                state.stocks.splice(state.stocks.indexOf(record), 1)
             }
             state.funds += stockPrice * quantity
         }
