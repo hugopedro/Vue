@@ -7,6 +7,11 @@ export default {
         //primeiro parâmetro sempre é o state, o 2o é o que se deseja passar
         setStocks(state, stocks) {
             state.stocks = stocks
+        },
+        randomizeStocks(state) {
+            state.stocks.forEach(stock => {
+                stock.price = Math.round(stock.price * ( 1 + Math.random() - 0.45))
+            })
         }
     },
     actions: {
@@ -19,6 +24,9 @@ export default {
             //aqui é que inicializa as ações
             console.log('initStocks...')
             commit('setStocks', stocks )
+        },
+        randomizeStocks({ commit }) {
+            commit('randomizeStocks')
         }
     },
     getters: {
